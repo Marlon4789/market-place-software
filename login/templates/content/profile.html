@@ -1,0 +1,12 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+<h1>profile</h1>
+
+{% if request.user.is_authenticated %}
+<h4>
+    {{ user.username | upper }}, bienvanido!!
+</h4>
+{% endif %}
+
+{% endblock %}
