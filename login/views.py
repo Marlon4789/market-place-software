@@ -40,20 +40,6 @@ def register(request):
         else:
             error_message = "Las contraseñas no coinciden."
             return render(request, 'registration/register.html', {"form": CustomUserCreationForm, "error": error_message})
-#    data = {
-#        'form': CustomUserCreationForm()
-#    }
-#    if request.method == 'POST':
-#        user_creation_form = CustomUserCreationForm(data=request.POST)
-       
-#        if user_creation_form.is_valid():
-#            user_creation_form.save()
-
-#            user = authenticate(username=user_creation_form.cleaned_data['username'], password=user_creation_form.cleaned_data['password1'])
-#            auth_login(request, user)
-#            return redirect('profile')
-#    return render(request, 'registration/register.html', data)
-
 
 
 def login_view(request):
@@ -68,4 +54,3 @@ def login_view(request):
 
         auth_login(request, user)
         return redirect('profile')
-    # return render(request, 'registration/login.html')
