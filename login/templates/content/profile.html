@@ -1,12 +1,33 @@
 {% extends 'layouts/base.html' %}
 
 {% block content %}
-<h1>profile</h1>
 
-{% if request.user.is_authenticated %}
-<h4>
-    {{ user.username | upper }}, bienvanido!!
-</h4>
-{% endif %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+
+            <h5 class="display-6 text-center my-5">¡Bienvenido a tu perfil!</h5>
+           
+            <div class="card mx-auto border border-success" style="width: 18rem;">
+                <i class="fa-solid fa-circle-user mx-auto my-3" style="font-size: 80px;"></i>
+                <div class="card-body">
+                  {% if request.user.is_authenticated %}
+                  <p class="card-text">{{ user.username | title }}</p>
+                  <p class="card-text">{{ user.email }}</p>
+                  {% endif %}
+                </div>
+              </div>
+            <div class="text-center mt-4">
+                <a class="btn btn-success" style="width: 18rem;" href="{% url 'home' %}">Ver home</a>
+            </div>
+            <div class="text-center mt-2">
+                <a class="btn btn-warning" style="width: 18rem;" href="{% url 'password_reset' %}">Cambiar contraseña</a>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
 
 {% endblock %}

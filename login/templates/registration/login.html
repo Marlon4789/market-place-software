@@ -12,22 +12,21 @@
                 <form action="" method="post">
 
                     {% csrf_token %}
-                    
-                    
+
                     {{ form | crispy }}
 
                     {% if error %}
                     <div class="alert alert-danger mt-3" role="alert">
-                        {{ error }}
+                    {{ error }}
                     </div>
                     {% endif %}
                     
                     <div class="">
-                        <a class="link-underline link-underline-opacity-25" href="">¿Olvido su contraseña?</a>
+                        <a class="link-underline link-underline-opacity-25" href="{% url 'password_reset' %}">¿Olvidó su contraseña?</a>
                     </div>
                     
                     <button class="col-12 btn btn-success mt-4" type="submit">Continue 
-                        <i class="fa-solid fa-right-to-bracket "></i>
+                        <i class="fa-solid fa-right-to-bracket"></i>
                     </button>
 
                     <div class="col-12 border mt-4">

@@ -8,8 +8,6 @@ from django.db import IntegrityError
 from django.contrib.auth.models import User
 
 
-# Create your views here.
-
 def home(request):
     return render(request, 'content/home.html')
 
@@ -54,3 +52,4 @@ def login_view(request):
 
         auth_login(request, user)
         return redirect('profile')
+    
