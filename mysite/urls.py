@@ -14,11 +14,27 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.urls import path, include
+from login.views import profile, home, exit, register, login_view
+from login.views import CustomPasswordResetView, CustomPasswordResetDoneView, CustomPasswordResetConfirmView, CustomPasswordResetCompleteView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('login.urls')),  # Incluir las URLs de la aplicación de autenticación
-    path('accounts/', include('django.contrib.auth.urls')),  # Incluir las URLs predeterminadas de Django para la autenticación
+    path('', home, name='home'),
+    path('profile/', profile, name='profile'),
+    path('logout/', exit, name='exit'),
+    path('register/', register, name='register'),
+    path('login/', login_view, name='login'),
+
+    # URLs de autenticación de Django
+    path('accounts/', include('django.contrib.auth.urls')),
+
+    # Resetear contraseña
+    path('password_reset/', CustomPasswordResetView.as_view(), name='password_reset'),
+    path('password_reset/done/', CustomPasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', CustomPasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    path('reset/done/', CustomPasswordResetCompleteView.as_view(), name='password_reset_complete'),
 ]

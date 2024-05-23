@@ -28,7 +28,9 @@ def register(request):
         if request.POST["password1"] == request.POST["password2"]:
             try:
                 user = User.objects.create_user(
-                    request.POST["username"], password=request.POST["password1"])
+                    request.POST["username"], 
+                    email=request.POST["email"],
+                    password=request.POST["password1"])
                 user.save()
                 auth_login(request, user)
                 return redirect('profile')
@@ -53,3 +55,22 @@ def login_view(request):
         auth_login(request, user)
         return redirect('profile')
     
+def password_reset(request):
+    return render(request, 'registration/password_reset_form.html')
+
+
+
+# Reestablecer contraseña
+from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+
+class CustomPasswordResetView(PasswordResetView):
+    template_name = 'registration/reset_password_form.html'
+
+class CustomPasswordResetDoneView(PasswordResetDoneView):
+    template_name = 'registration/reset_password_done.html'
+
+class CustomPasswordResetConfirmView(PasswordResetConfirmView):
+    template_name = 'registration/reset_password_confirm.html'
+
+class CustomPasswordResetCompleteView(PasswordResetCompleteView):
+    template_name = 'registration/reset_password_complete.html'

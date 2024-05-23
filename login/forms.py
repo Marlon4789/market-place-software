@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 
 
 class CustomUserCreationForm(UserCreationForm):
+
+    email = forms.EmailField(required=True)
  
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
