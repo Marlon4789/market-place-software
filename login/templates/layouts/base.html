@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
+<html lang="en" data-bs-theme="dark" style="font-size: 0.8rem;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,10 +22,12 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
                     </li>
+                    
+                    {% if request.user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'profile' %}">Profile</a>
                     </li>
-                    {% if request.user.is_authenticated %}
+
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'exit' %}">Logout</a>
                     </li>

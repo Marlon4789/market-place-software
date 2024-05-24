@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.urls import path, include
 from login.views import profile, home, exit, register, login_view
 from login.views import CustomPasswordResetView, CustomPasswordResetDoneView, CustomPasswordResetConfirmView, CustomPasswordResetCompleteView
-
+from login.views import delete_account, account_deleted
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -37,4 +37,8 @@ urlpatterns = [
     path('password_reset/done/', CustomPasswordResetDoneView.as_view(), name='password_reset_done'),
     path('reset/<uidb64>/<token>/', CustomPasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('reset/done/', CustomPasswordResetCompleteView.as_view(), name='password_reset_complete'),
+
+    # eliminar cuenta
+    path('delete_account/', delete_account, name='delete_account'),
+    path('account_deleted/', account_deleted, name='account_deleted'),  
 ]

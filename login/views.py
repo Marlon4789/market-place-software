@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.forms import AuthenticationForm
 from django.db import IntegrityError
 from django.contrib.auth.models import User
+from .forms import UserDeleteForm
 
 
 def home(request):
@@ -59,7 +60,6 @@ def password_reset(request):
     return render(request, 'registration/password_reset_form.html')
 
 
-
 # Reestablecer contraseña
 from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 
@@ -74,3 +74,22 @@ class CustomPasswordResetConfirmView(PasswordResetConfirmView):
 
 class CustomPasswordResetCompleteView(PasswordResetCompleteView):
     template_name = 'registration/reset_password_complete.html'
+
+
+# elminar cuenta
+@login_required
+def delete_account(request):
+    if request.method == 'POST':
+        form = UserDeleteForm(request.POST)
+        if form.is_valid() and form.cleaned_data['confirm']:
+            user = request.user
+            user.delete()
+            logout(request)
+            return redirect('account_deleted')  # Redirigir a una página de confirmación
+    else:
+        form = UserDeleteForm()
+    
+    return render(request, 'registration/delete_account.html', {'form': form})
+
+def account_deleted(request):
+    return render(request, 'registration/account_deleted.html')
